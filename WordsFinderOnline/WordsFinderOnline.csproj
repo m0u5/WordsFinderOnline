@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="WordsFinder">
+      <HintPath>..\..\Homework3Service\Homework3Service\WordsFinder.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>
