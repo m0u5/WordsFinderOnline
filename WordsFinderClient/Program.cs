@@ -15,9 +15,11 @@ namespace WordsFinderClient
             string resultPath = Console.ReadLine();
             string text = File.ReadAllText(filePath);
 
-            var content = JsonContent.Create(text);
-           
-           using var response = await httpClient.PostAsync("http://localhost:7280/CountWords", content);
+            
+            var content = new StringContent(text);
+
+
+            using var response = await httpClient.PostAsync("https://localhost:7280/CountWords", content);
             
             var result = await response.Content.ReadFromJsonAsync<Dictionary<string, int>>();
             WriteToFile(resultPath, result);

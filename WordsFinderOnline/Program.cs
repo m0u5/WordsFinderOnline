@@ -1,4 +1,6 @@
-    namespace WordsFinderOnline
+using Newtonsoft.Json;
+
+namespace WordsFinderOnline
 {
     public class Program
     {
@@ -7,12 +9,19 @@
             var builder = WebApplication.CreateBuilder();
             var app = builder.Build();
 
-            app.MapPost("/CountWords", (RecievedText text) =>
+            app.Map("/CountWords", async (HttpContext httpContext) =>
             {
-
-                var result = new WordsFinder.WordsFinder().CountWordsWithParallel(text.Text);
-                return Results.Json(result);
+                using StreamReader reader = new StreamReader(httpContext.Request.Body);
+                string text = await reader.ReadToEndAsync();
+                
+                var result = new WordsFinder.WordsFinder().CountWordsWithParallel(text);
+                
+                return JsonConvert.SerializeObject(result);
             });
+            app.Map("/", ()=>
+            
+                "Hello world"
+            );
 
             app.Run();
         }
